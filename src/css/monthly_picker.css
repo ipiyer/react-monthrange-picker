@@ -1,0 +1,32 @@
+.month-picker .arrow-top {
+  position: relative;
+  border-color: #666;
+}
+.month-picker .arrow-top:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-color: #666;
+  top: 100%;
+  left: 50%;
+  margin-top: 5px;
+  margin-left: -10px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #666;
+  border-top-color: inherit;
+}
+.month-picker a.cal-month {
+  color: #000;
+  text-decoration: none;
+}
+.month-picker .highlight a.cal-month {
+  color: red;
+}
+.month-picker .selected {
+  background-color: green;
+}
+.month-picker .selected a.cal-month {
+  color: white;
+}

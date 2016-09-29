@@ -1,0 +1,23 @@
+@import "arrow";
+
+.month-picker {
+  .arrow-top {
+    @include arrow-lazy(down, $color: #666, $margin: 5px);
+  }
+  a.cal-month {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .highlight {
+    a.cal-month {
+      color: red;
+    }
+  }
+  .selected {
+    background-color: green;
+    a.cal-month {
+      color: white;      
+    }
+  }
+}
