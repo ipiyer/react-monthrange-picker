@@ -12,10 +12,12 @@ const gulp = require("gulp"),
   },
   watchify = require("watchify"),
   browserify = require("browserify"),
+  babelify = require("babelify"),
   assign = require('lodash.assign'),
   source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
-  sourcemaps = require('gulp-sourcemaps');
+  sourcemaps = require('gulp-sourcemaps'),
+  packageManifest = require('./package.json');;
 
 gulp.task("build-css", function() {
   gulp.src(paths.sass)
@@ -30,16 +32,26 @@ gulp.task("build-css", function() {
     .pipe(plugins.livereload());
 });
 
-// add custom browserify options here
+
+var appDeps = Object.keys(packageManifest.dependencies);
+console.log(appDeps)
+  // add custom browserify options here
 var customOpts = {
   entries: ["./src/index.jsx"],
+  extensions: ['.js', '.jsx'],
   // entries: paths.pageJS,
   debug: true,
-  transform: ["reactify"],
+  cache: {},
+  packageCache: {}
 };
-var opts = assign({}, watchify.args, customOpts);
-var b = watchify(browserify(opts));
 
+var b = browserify(customOpts)
+b.transform(babelify.configure({
+  presets: ["es2015", "react"]
+}));
+// var opts = assign({}, watchify.args, customOpts);
+// var b = watchify(browserify(opts));
+b.external(appDeps);
 // add transformations here
 // i.e. b.transform(coffeeify);
 

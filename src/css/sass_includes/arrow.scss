@@ -1,52 +1,139 @@
 @import "compass/css3";
-
-@mixin arrow-lazy($direction: top, $size: 10px, $color: #ccc, $center: 50%, $margin: -1px, $pseudo: before){
-    position: relative;
-    border-color: $color;
-
-    &:#{$pseudo} {
-        position: absolute;
-        content: "";
-        width: 0;
-        height: 0;
-        border-color: $color;
-
-        @if $direction == "right" {
-            top: $center;
-            left: 100%;
-            margin-left: $margin;
-            margin-top: $size * -1;
-            border-top: $size solid transparent;
-            border-bottom: $size solid transparent;
-            border-left: $size solid $color;
-            border-left-color: inherit;
-        } @else if $direction == "down" {
-            top: 100%;
-            left: $center;
-            margin-top: $margin;
-            margin-left: $size * -1;
-            border-left: $size solid transparent;
-            border-right: $size solid transparent;
-            border-top: $size solid $color;
-            border-top-color: inherit;
-        } @else if $direction == "left" {
-            top: $center;
-            right: 100%;
-            margin-right: $margin;
-            margin-top: $size * -1;
-            border-top: $size solid transparent;
-            border-bottom: $size solid transparent;
-            border-right:$size solid $color;
-            border-right-color: inherit;
-        } @else {
-            bottom: 100%;
-            left: $center;
-            margin-bottom: $margin;
-            margin-left: $size * -1;
-            border-left: $size solid transparent;
-            border-right: $size solid transparent;
-            border-bottom: $size solid $color;
-            border-bottom-color: inherit;
-        }
-    }
+// Size helper mixin
+// ---
+// @param [number] $width: width
+// @param [number] $height ($width): height
+// ---
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
 }
+// [Private]
+// Position helper mixin
+// Article about it: http://hugogiraudel.com/2013/08/05/offsets-sass-mixin/
+// ---
+// @param [string] $position: position type
+// @param [list] $args: list of offsets and values
+// ---
+@mixin _position($position, $args) {
+   @each $o in top right bottom left{
+    $i: index($args, $o);
+    @if $i and $i + 1 <= length($args) and type-of( nth($args, $i + 1) ) == number {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+  position: $position;
+}
+// Absolute positioning helper mixin
+// Article about it: http://hugogiraudel.com/2013/08/05/offsets-sass-mixin/
+// ---
+// @param [list] $args: list of offsets and values
+// ---
+@mixin absolute($args) {
+   @include _position(absolute, $args);
+}
+// Arrow helper mixin
+// ---
+// @param [string] $direction: arrow direction
+// @param [list] $position: list of offsets and values
+// @param [color] $color (inherit): arrow color
+// @param [number] $size (1em): arrow size
+// ---
+@mixin triangle($direction, $position, $color: currentColor, $size: 1em) {
+  // Make sure the direction is valid
+  @if not index(top right bottom left, $direction) {
+     @warn"Direction must be one of top, right, bottom or left.";
+  }
+  @else {
+     @include absolute($position); // Position
+    @include size(0); // Size
+    content: '';
+    z-index: 2;
+    border-#{opposite-position($direction)}: $size * 1.5 solid $color;
+    $perpendicular-borders: $size solid transparent;
+    @if $direction == top or $direction == bottom {
+      border-left: $perpendicular-borders;
+      border-right: $perpendicular-borders;
+    }
+    @else if $direction == right or $direction == left {
+      border-bottom: $perpendicular-borders;
+      border-top: $perpendicular-borders;
+    }
+  }
+}
+// EXAMPLE
+.tooltip {
+  // Centering
+  max-width: 20em;
+  margin: 0 auto;
+  // Enable absolute positioning for pseudo-element
+  position: relative;
+  // Aesthetics
+  background: #3498db;
+  padding: 0.5em;
+  border-radius: 0.15em;
+  filter: drop-shadow(0 .15em .1em rgba(0,0,0,.25));
+  // Font
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  // Triangle
+  &:before {
+    @include triangle( $direction : bottom, $position : top 100% left 1em, $color : #3498db );
+  }
+}
+// @mixin arrow-lazy($direction: top, $size: 10px, $color: #ccc, $center: 50%, $margin: -1px, $pseudo: before) {
+//   position: relative;
+//   border-color: $color;
+//
+//   &:#{$pseudo} {
+//     position: absolute;
+//     content: "";
+//     width: 0;
+//     height: 0;
+//     border-color: $color;
+//
+//     @if $direction == "right" {
+//       top: $center;
+//       left: 100%;
+//       margin-left: $margin;
+//       margin-top: $size * -1;
+//       border-top: $size solid transparent;
+//       border-bottom: $size solid transparent;
+//       border-left: $size solid #fff;
+//       border-left-color: inherit;
+//     }
+//
+//     @else if $direction == "down" {
+//       top: 100%;
+//       left: $center;
+//       margin-top: $margin;
+//       margin-left: $size * -1;
+//       border-left: $size solid transparent;
+//       border-right: $size solid transparent;
+//       border-top: $size solid $color;
+//       border-top-color: inherit;
+//     }
+//
+//     @else if $direction == "left" {
+//       top: $center;
+//       right: 100%;
+//       margin-right: $margin;
+//       margin-top: $size * -1;
+//       border-top: $size solid transparent;
+//       border-bottom: $size solid transparent;
+//       border-right: $size solid $color;
+//       border-right-color: inherit;
+//     }
+//     @else {
+//       bottom: 100%;
+//       left: $center;
+//       margin-bottom: $margin;
+//       margin-left: $size * -1;
+//       border-left: $size solid transparent;
+//       border-right: $size solid transparent;
+//       border-bottom: $size solid $color;
+//       border-bottom-color: inherit;
+//     }
+//   }
+// }

@@ -1,32 +1,108 @@
-.month-picker .arrow-top {
+.tooltip {
+  max-width: 20em;
+  margin: 0 auto;
   position: relative;
-  border-color: #666;
+  background: #3498db;
+  padding: 0.5em;
+  border-radius: 0.15em;
+  filter: drop-shadow(0 0.15em 0.1em rgba(0, 0, 0, 0.25));
+  color: white;
+  text-align: center;
+  font-weight: bold;
 }
-.month-picker .arrow-top:before {
+.tooltip:before {
+  top: 100%;
+  left: 1em;
   position: absolute;
-  content: "";
   width: 0;
   height: 0;
-  border-color: #666;
-  top: 100%;
-  left: 50%;
-  margin-top: 5px;
-  margin-left: -10px;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #666;
-  border-top-color: inherit;
+  content: '';
+  z-index: 2;
+  border-top: 1.5em solid #3498db;
+  border-left: 1em solid transparent;
+  border-right: 1em solid transparent;
 }
-.month-picker a.cal-month {
-  color: #000;
+
+#content .picker {
+  width: 200px;
+  position: absolute;
+  right: 0;
+}
+
+.month-picker {
+  display: inline-block;
+}
+.month-picker .btn-plain {
+  background-color: #fff;
+  border: 0 solid;
+}
+.month-picker .picker {
+  display: inline-block;
+}
+.month-picker .picker .date-str {
+  margin: 0 7px;
+}
+.month-picker .picker .date-str .date {
+  margin: 0 5px;
+}
+.month-picker .arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-right-width: 0;
+  border-left-color: #999;
+}
+.month-picker .arrow:after {
+  right: 1px;
+  border-right-width: 0;
+  border-left-color: #fff;
+}
+.month-picker .wrap {
+  max-width: inherit;
+}
+.month-picker div.head {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+.month-picker div.head span.text {
+  width: 50%;
+  display: inline-block;
+}
+.month-picker .calendar,
+.month-picker .shortcuts {
+  padding: 0 5px;
+}
+.month-picker .calendar .year {
+  padding: 3px 8px;
+  border-right: solid #999 1px;
+}
+.month-picker .calendar .mpr-calendar::last-child {
+  border-right: none;
+}
+.month-picker .calendar .months a {
   text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+  color: #000;
 }
-.month-picker .highlight a.cal-month {
-  color: red;
+.month-picker .calendar .months .month {
+  text-align: center;
+  width: 24%;
+  float: left;
+  display: inline-block;
+  margin: 0.5px;
+  padding: 15px;
 }
-.month-picker .selected {
-  background-color: green;
+.month-picker .calendar .months .month.highlight {
+  background-color: rgba(64, 102, 122, 0.5);
 }
-.month-picker .selected a.cal-month {
-  color: white;
+.month-picker .calendar .months .month.highlight a {
+  color: #fff;
+}
+.month-picker .calendar .months .month.selected {
+  background-color: #40667a;
+}
+.month-picker .calendar .months .month.selected a {
+  color: #fff;
 }

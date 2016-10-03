@@ -1,23 +1,109 @@
 @import "arrow";
 
-.month-picker {
-  .arrow-top {
-    @include arrow-lazy(down, $color: #666, $margin: 5px);
+#content {
+  .picker {
+    width: 200px;
+    position: absolute;
+    right: 0;
   }
-  a.cal-month {
-    color: #000;
-    text-decoration: none;
+}
+
+.month-picker {
+  display: inline-block;
+
+  .btn-plain {
+    background-color: #fff;
+    border: 0 solid;
   }
 
-  .highlight {
-    a.cal-month {
-      color: red;
+  .picker {
+    display: inline-block;
+
+    .date-str {
+      margin: 0 7px;
+
+      .date {
+        margin: 0 5px;
+      }
     }
   }
-  .selected {
-    background-color: green;
-    a.cal-month {
-      color: white;      
+
+  .arrow {
+    top: 50%;
+    right: -11px;
+    margin-top: -11px;
+    border-right-width: 0;
+    border-left-color: #999;
+
+    &:after {
+      right: 1px;
+      border-right-width: 0;
+      border-left-color: #fff;
+    }
+  }
+
+  .wrap {
+    max-width: inherit;
+  }
+
+  div.head {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+
+    span.text {
+      width: 50%;
+      display: inline-block;
+    }
+  }
+
+  .calendar,
+  .shortcuts {
+    padding: 0 5px;
+  }
+
+  .calendar {
+    .year {
+      padding: 3px 8px;
+      border-right: solid #999 1px;
+    }
+
+    .mpr-calendar::last-child {
+      border-right: none;
+    }
+
+    .months {
+      a {
+        text-decoration: none;
+        text-transform: uppercase;
+        display: inline-block;
+        color: #000;
+      }
+
+      .month {
+        text-align: center;
+        width: 24%;
+        float: left;
+        display: inline-block;
+        margin: 0.5px;
+        padding: 15px;
+
+        &.highlight {
+          background-color: rgba(64,102,122,.5);
+
+          a {
+            color: #fff;
+          }
+        }
+
+        &.selected {
+          background-color: rgb(64, 102, 122);
+
+          a {
+            color: #fff;
+          }
+        }
+      }
     }
   }
 }
