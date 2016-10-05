@@ -77,6 +77,17 @@ class YearBase extends React.Component {
       } else if (_selectedRange.contains(newDate, true)) {
         selection = "highlight";
       }
+      if(currYear === that.date.format("YYYY") && month === _selectedRange.start.format("MMM")) {
+        selection += " startmonth";
+      }
+      if (currYear === that.date.format("YYYY") && month === _selectedRange.end.format("MMM")) {
+        selection += " endmonth";
+      }
+
+      if (_selectedRange.diff('months') <= 3) {
+        selection += " singlerow"
+      }
+
 
       return (
         <span key={Date.now() + idx} className={selection + " month"}>
@@ -93,19 +104,19 @@ class YearBase extends React.Component {
     return (
       <div className="">
         <div className="head">
-          <h5 className="title clearfix">
+          <h4 className="title clearfix">
             <button
-              className='btn btn-plain year-down'
+              className='btn btn-plain year-down pull-left'
               onClick={this.changeYear.bind(this, -1)}>
               <i className="fa fa-chevron-circle-left"></i>
             </button>
-            <span className="text">{currYear}</span>
+            {currYear}
             <button
-              className='btn btn-plain year-up'
+              className='btn btn-plain year-up pull-right'
               onClick={this.changeYear.bind(this, 1)}>
               <i className="fa fa-chevron-circle-right"></i>
             </button>
-          </h5>
+          </h4>
         </div>
         <div className="months">
           <div className="clearfix">
@@ -225,9 +236,6 @@ const Calender = React.createClass({
             </div>
           </div>
           <div className="shortcuts col-xs-2">
-            <div className="head">
-              <h5 className="title">Shortcuts</h5>
-            </div>
             <button
               onClick={this.props.onApply}
               type="button"
