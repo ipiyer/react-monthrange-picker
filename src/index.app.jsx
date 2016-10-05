@@ -26,6 +26,7 @@ const MONTHS = [
 class YearBase extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       currYear: this.props.currYear.format("YYYY")
     };
@@ -52,6 +53,7 @@ class YearBase extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     let target = $(e.target);
+
     let selectedMonth = parseInt(target.data("idx"), 10);
     // this is either start or end of the moment range;
     this.date.month(selectedMonth).year(this.state.currYear);
