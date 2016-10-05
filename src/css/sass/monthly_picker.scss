@@ -1,4 +1,9 @@
-@import "arrow";
+// @import "arrow";
+@import "compass/css3/border-radius";
+
+// variables
+$monthradius: 15px;
+
 
 #content {
   .picker {
@@ -37,6 +42,7 @@
 
     &:after {
       right: 1px;
+      margin-top: -10px;
       border-right-width: 0;
       border-left-color: #fff;
     }
@@ -44,6 +50,7 @@
 
   .wrap {
     max-width: inherit;
+    padding: 10px 0;
   }
 
   div.head {
@@ -51,20 +58,40 @@
     margin: 0 auto;
     text-align: center;
 
-    span.text {
-      width: 50%;
-      display: inline-block;
+    .title {
+      button {
+        margin-top: -7px;
+        i {
+          font-size: 1.5em;
+          color: #999999;
+        }
+        &:hover {
+          i {
+            color: #555;
+          }
+        }
+      }
+
+
+      span.text {
+        width: 50%;
+        display: inline-block;
+      }
     }
   }
 
   .calendar,
   .shortcuts {
-    padding: 0 5px;
+    padding: 0 10px 0 0;
+
+    button:first-child {
+      margin-top: 125px;
+    }
   }
 
   .calendar {
     .year {
-      padding: 3px 8px;
+      padding: 3px 2px 3px 10px;
       border-right: solid #999 1px;
     }
 
@@ -86,7 +113,17 @@
         float: left;
         display: inline-block;
         margin: 0.5px;
-        padding: 15px;
+        padding: 0;
+        font-size: 0.9em;
+        border: 1px solid transparent;
+
+        a {
+          padding: 15px;
+        }
+
+        &:hover {
+          border-color: #CCC;
+        }
 
         &.highlight {
           background-color: rgba(64,102,122,.5);
@@ -101,6 +138,21 @@
 
           a {
             color: #fff;
+          }
+        }
+
+        &.startmonth {
+          @include border-top-left-radius($monthradius);
+
+          &.singlerow {
+            @include border-bottom-left-radius($monthradius);
+          }
+        }
+        &.endmonth {
+          @include border-bottom-right-radius($monthradius);
+
+          &.singlerow {
+            @include border-top-right-radius($monthradius);
           }
         }
       }
