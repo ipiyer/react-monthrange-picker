@@ -1,20 +1,15 @@
 // @import "arrow";
-@import "compass/css3/border-radius";
-
-// variables
+@import "compass/css3/border-radius"; // variables
 $monthradius: 15px;
 
-
 #content {
-  .picker {
-    width: 200px;
-    position: absolute;
-    right: 0;
-  }
+  position: absolute;
+  left: 400px;
+  top: 200px;
 }
 
 .month-picker {
-  display: inline-block;
+  position: relative;
 
   .btn-plain {
     background-color: #fff;
@@ -33,22 +28,27 @@ $monthradius: 15px;
     }
   }
 
+  .sec-wrap {
+    position: relative;
+  }
+
   .arrow {
-    top: 50%;
-    right: -11px;
-    margin-top: -11px;
-    border-right-width: 0;
-    border-left-color: #999;
+    top: -11px;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #999;
+    border-bottom-color: rgba(0,0,0,.25);
 
     &:after {
-      right: 1px;
-      margin-top: -10px;
-      border-right-width: 0;
-      border-left-color: #fff;
+      top: 1px;
+      margin-left: -10px;
+      content: " ";
+      border-top-width: 0;
+      border-bottom-color: #fff;
     }
   }
 
-  .wrap {
+  .popover {
     max-width: inherit;
     padding: 10px 0;
   }
@@ -61,17 +61,18 @@ $monthradius: 15px;
     .title {
       button {
         margin-top: -7px;
+
         i {
           font-size: 1.5em;
           color: #999999;
         }
+
         &:hover {
           i {
             color: #555;
           }
         }
       }
-
 
       span.text {
         width: 50%;
@@ -80,19 +81,27 @@ $monthradius: 15px;
     }
   }
 
-  .calendar,
   .shortcuts {
     padding: 0 10px 0 0;
-
-    button:first-child {
-      margin-top: 125px;
-    }
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 
   .calendar {
+    padding: 0 10px 0 0;
+
     .year {
       padding: 3px 2px 3px 10px;
       border-right: solid #999 1px;
+
+      &.year-start .selected {
+        @include border-top-left-radius($monthradius);
+      }
+
+      &.year-end .selected {
+        @include border-bottom-right-radius($monthradius);
+      }
     }
 
     .mpr-calendar::last-child {
@@ -100,11 +109,11 @@ $monthradius: 15px;
     }
 
     .months {
-      a {
-        text-decoration: none;
+      button {
         text-transform: uppercase;
         display: inline-block;
         color: #000;
+        background-color: transparent;
       }
 
       .month {
@@ -117,7 +126,7 @@ $monthradius: 15px;
         font-size: 0.9em;
         border: 1px solid transparent;
 
-        a {
+        button {
           padding: 15px;
         }
 
@@ -128,7 +137,7 @@ $monthradius: 15px;
         &.highlight {
           background-color: rgba(64,102,122,.5);
 
-          a {
+          button {
             color: #fff;
           }
         }
@@ -136,23 +145,8 @@ $monthradius: 15px;
         &.selected {
           background-color: rgb(64, 102, 122);
 
-          a {
+          button {
             color: #fff;
-          }
-        }
-
-        &.startmonth {
-          @include border-top-left-radius($monthradius);
-
-          &.singlerow {
-            @include border-bottom-left-radius($monthradius);
-          }
-        }
-        &.endmonth {
-          @include border-bottom-right-radius($monthradius);
-
-          &.singlerow {
-            @include border-top-right-radius($monthradius);
           }
         }
       }

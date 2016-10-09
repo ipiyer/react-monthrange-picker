@@ -12,7 +12,6 @@ const gulp = require("gulp"),
     sass_includes: ['./src/css/sass_includes/*.scss']
   },
   watchify = require("watchify"),
-  through = require("through"),
   browserify = require("browserify"),
   babelify = require("babelify"),
   assign = require('lodash.assign'),
@@ -24,8 +23,8 @@ const gulp = require("gulp"),
   es = require('event-stream'),
   runSequence = require("run-sequence");
 
-gulp.task("build-example-css", function() {
-  gulp.src(paths.sass)
+(function() {
+  var css = () => gulp.src(paths.sass)
     .pipe(plugins.compass({
       css: 'src/css',
       sass: 'src/css/sass',
@@ -33,27 +32,21 @@ gulp.task("build-example-css", function() {
     }))
     .once('error', function(err) {
       console.log(err);
-    })
-    .pipe(gulp.dest('./example/css'))
-    .pipe(plugins.livereload());
-});
+    });
 
-gulp.task("build-dist-css", function() {
-  gulp.src(paths.sass)
-    .pipe(plugins.compass({
-      css: 'src/css',
-      sass: 'src/css/sass',
-      import_path: 'src/css/sass_includes'
-    }))
-    .once('error', function(err) {
-      console.log(err);
-    })
-    .pipe(gulp.dest('./dist'));
-});
+  gulp.task("build-example-css", function() {
+    css().pipe(gulp.dest('./example/css'))
+      .pipe(plugins.livereload());
+  });
+
+  gulp.task("build-dist-css", function() {
+    css.pipe(gulp.dest('./dist/css'));
+  });
+})();
 
 const appDeps = Object.keys(packageManifest.dependencies);
 
-gulp.task('build-vendor', function() {
+(function() {
   var b = browserify({
     debug: true,
     cache: {},
@@ -62,26 +55,19 @@ gulp.task('build-vendor', function() {
 
   b.require(appDeps);
 
-  return b.bundle()
+  var bundleV = b.bundle()
     .on('error', gutil.log.bind(gutil, "Browserify Vendor Error"))
     .pipe(source('vendor_bundle.js'))
-    .pipe(gulp.dest("./dist"));
-});
 
-gulp.task('build-vendor-example', function() {
-  var b = browserify({
-    debug: true,
-    cache: {},
-    packageCache: {}
+
+  gulp.task('build-dist-vendor', function() {
+    bundleV.pipe(gulp.dest("./dist"));
   });
 
-  b.require(appDeps);
-
-  return b.bundle()
-    .on('error', gutil.log.bind(gutil, "Browserify Vendor Error"))
-    .pipe(source('vendor_bundle.js'))
-    .pipe(gulp.dest("./example/"));
-});
+  gulp.task('build-example-vendor', function() {
+    bundleV.pipe(gulp.dest("./example/"));
+  });
+})();
 
 gulp.task('build-dist-js', function() {
   var b = browserify({
@@ -92,15 +78,15 @@ gulp.task('build-dist-js', function() {
     packageCache: {}
   });
 
+
   b.external(appDeps);
   b.transform(babelify.configure({
     presets: ["es2015", "react"]
   }));
 
-  return b.bundle()
+  b.bundle()
     .on('error', gutil.log.bind(gutil, "Browserify Error"))
-
-  .pipe(source('calendar.js'))
+    .pipe(source('calendar.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({
       loadMaps: true
@@ -108,13 +94,13 @@ gulp.task('build-dist-js', function() {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist'))
     .pipe(livereload());
-})
+});
 
 
-gulp.task('example', bundle);
+gulp.task('example-js', bundle);
 
 var customOpts = {
-  entries: ["./src/index.app.jsx"],
+  entries: ["./example/month_picker.jsx"],
   extensions: ['.js', '.jsx'],
   debug: true,
   cache: {},
@@ -158,9 +144,8 @@ gulp.task('clean-dist', function() {
   return del('dist');
 });
 
-gulp.task("dev", ["server", "build-vendor-example", "build-example-css",
-  "example",
-  "watch"
+gulp.task("dev", ["server", "build-example-vendor", "build-example-css",
+  "example-js", "watch"
 ]);
 
 gulp.task("dist", function(callback) {
@@ -177,6 +162,5 @@ gulp.task('watch', function() {
 
   gulp.watch(paths.sass.concat(paths.sass_includes), {
     usePolling: true
-  }, ['build-css']);
-
+  }, ['build-example-css']);
 });

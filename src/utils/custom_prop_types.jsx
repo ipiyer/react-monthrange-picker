@@ -1,15 +1,35 @@
-"use strict";
+import moment from 'moment';
 
-var moment = require('moment');
-require("moment-range");
+require('moment-range');
 
 function isMomentRange(val) {
   return val && val.start && val.end && moment.isMoment(val.start) && moment.isMoment(val.end);
 }
 
-const MomentType = (props, propName) => {
-  let val = props[propName];
+const chainablePropType = (predicate) => {
+  const propType = (props, propName, componentName) => {
+    // don't do any validation if empty
+    if (props[propName] == null) {
+      return false;
+    }
 
+    return predicate(props, propName, componentName);
+  };
+
+  propType.isRequired = (props, propName, componentName) => {
+    // warn if empty
+    if (props[propName] == null) {
+      return new Error(`Required prop \`${propName}\` was not specified in \`${componentName}\`.`);
+    }
+
+    return predicate(props, propName, componentName);
+  };
+
+  return propType;
+};
+
+const MomentType = (props, propName) => {
+  const val = props[propName];
   if (!val) {
     return null;
   } else if (moment.isMoment(val)) {
@@ -19,7 +39,7 @@ const MomentType = (props, propName) => {
 };
 
 const MomentRangeType = (props, propName) => {
-  let val = props[propName];
+  const val = props[propName];
 
   if (!val) {
     return null;
@@ -30,6 +50,6 @@ const MomentRangeType = (props, propName) => {
 };
 
 module.exports = {
-  MomentType: MomentType,
-  MomentRangeType: MomentRangeType
+  MomentType: chainablePropType(MomentType),
+  MomentRangeType: chainablePropType(MomentRangeType),
 };

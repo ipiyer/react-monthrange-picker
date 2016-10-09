@@ -1,11 +1,11 @@
-#content .picker {
-  width: 200px;
+#content {
   position: absolute;
-  right: 0;
+  left: 400px;
+  top: 200px;
 }
 
 .month-picker {
-  display: inline-block;
+  position: relative;
 }
 .month-picker .btn-plain {
   background-color: #fff;
@@ -20,20 +20,24 @@
 .month-picker .picker .date-str .date {
   margin: 0 5px;
 }
+.month-picker .sec-wrap {
+  position: relative;
+}
 .month-picker .arrow {
-  top: 50%;
-  right: -11px;
-  margin-top: -11px;
-  border-right-width: 0;
-  border-left-color: #999;
+  top: -11px;
+  margin-left: -11px;
+  border-top-width: 0;
+  border-bottom-color: #999;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
 }
 .month-picker .arrow:after {
-  right: 1px;
-  margin-top: -10px;
-  border-right-width: 0;
-  border-left-color: #fff;
+  top: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-width: 0;
+  border-bottom-color: #fff;
 }
-.month-picker .wrap {
+.month-picker .popover {
   max-width: inherit;
   padding: 10px 0;
 }
@@ -56,26 +60,37 @@
   width: 50%;
   display: inline-block;
 }
-.month-picker .calendar,
 .month-picker .shortcuts {
   padding: 0 10px 0 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
-.month-picker .calendar button:first-child,
-.month-picker .shortcuts button:first-child {
-  margin-top: 125px;
+.month-picker .calendar {
+  padding: 0 10px 0 0;
 }
 .month-picker .calendar .year {
   padding: 3px 2px 3px 10px;
   border-right: solid #999 1px;
 }
+.month-picker .calendar .year.year-start .selected {
+  -moz-border-radius-topleft: 15px;
+  -webkit-border-top-left-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.month-picker .calendar .year.year-end .selected {
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
 .month-picker .calendar .mpr-calendar::last-child {
   border-right: none;
 }
-.month-picker .calendar .months a {
-  text-decoration: none;
+.month-picker .calendar .months button {
   text-transform: uppercase;
   display: inline-block;
   color: #000;
+  background-color: transparent;
 }
 .month-picker .calendar .months .month {
   text-align: center;
@@ -87,7 +102,7 @@
   font-size: 0.9em;
   border: 1px solid transparent;
 }
-.month-picker .calendar .months .month a {
+.month-picker .calendar .months .month button {
   padding: 15px;
 }
 .month-picker .calendar .months .month:hover {
@@ -96,32 +111,12 @@
 .month-picker .calendar .months .month.highlight {
   background-color: rgba(64, 102, 122, 0.5);
 }
-.month-picker .calendar .months .month.highlight a {
+.month-picker .calendar .months .month.highlight button {
   color: #fff;
 }
 .month-picker .calendar .months .month.selected {
   background-color: #40667a;
 }
-.month-picker .calendar .months .month.selected a {
+.month-picker .calendar .months .month.selected button {
   color: #fff;
-}
-.month-picker .calendar .months .month.startmonth {
-  -moz-border-radius-topleft: 15px;
-  -webkit-border-top-left-radius: 15px;
-  border-top-left-radius: 15px;
-}
-.month-picker .calendar .months .month.startmonth.singlerow {
-  -moz-border-radius-bottomleft: 15px;
-  -webkit-border-bottom-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-}
-.month-picker .calendar .months .month.endmonth {
-  -moz-border-radius-bottomright: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
-.month-picker .calendar .months .month.endmonth.singlerow {
-  -moz-border-radius-topright: 15px;
-  -webkit-border-top-right-radius: 15px;
-  border-top-right-radius: 15px;
 }
