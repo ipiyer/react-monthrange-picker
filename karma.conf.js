@@ -79,17 +79,19 @@ module.exports = function(config) {
     },
 
     coverageReporter: {
+      dir: 'coverage/ui-coverage',
       reporters: [{
+        type: 'lcov',
+        subdir: 'report-lcov',
+      }, {
         type: 'html',
-        dir: 'coverage/ui-coverage',
         subdir: 'html',
       }, {
         type: 'cobertura',
-        dir: 'coverage/ui-coverage',
         subdir: 'cobertura',
       }, {
         type: 'text-summary',
-      }, ],
+      }],
     },
 
     thresholdReporter: {
