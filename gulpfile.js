@@ -40,7 +40,7 @@ const gulp = require("gulp"),
   });
 
   gulp.task("build-dist-css", function() {
-    css.pipe(gulp.dest('./dist/css'));
+    css().pipe(gulp.dest('./dist/css'));
   });
 })();
 
@@ -149,7 +149,7 @@ gulp.task("dev", ["server", "build-example-vendor", "build-example-css",
 ]);
 
 gulp.task("dist", function(callback) {
-  runSequence(['clean-dist', 'build-vendor', 'build-dist-css',
+  runSequence(['clean-dist', 'build-dist-vendor', 'build-dist-css',
       'build-dist-js'
     ],
     callback);
