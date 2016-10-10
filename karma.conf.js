@@ -81,15 +81,22 @@ module.exports = function(config) {
     coverageReporter: {
       reporters: [{
         type: 'html',
-        dir: 'dist/ui-coverage',
+        dir: 'coverage/ui-coverage',
         subdir: 'html',
       }, {
         type: 'cobertura',
-        dir: 'dist/ui-coverage',
+        dir: 'coverage/ui-coverage',
         subdir: 'cobertura',
       }, {
         type: 'text-summary',
       }, ],
+    },
+
+    thresholdReporter: {
+      statements: 90,
+      branches: 85,
+      functions: 90,
+      lines: 90,
     },
     // web server port
     port: 9876,
@@ -123,5 +130,5 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
+  });
 }
