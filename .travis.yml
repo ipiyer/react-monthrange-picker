@@ -1,10 +1,7 @@
 language: node_js
 node_js:
   - "6"
-  - "5"
-  - "4"
   - "4.2"
-  - "iojs"
 before_script:
   - 'if [ "${TRAVIS_NODE_VERSION}" = 6 ]; then export DISPLAY=:99.0; fi'
   - 'if [ "${TRAVIS_NODE_VERSION}" = 6 ]; then sh -e /etc/init.d/xvfb start; fi'
@@ -23,8 +20,6 @@ sudo: false
 matrix:
   fast_finish: true
   include:
-#    - node_js: "node"
-#      env: KARMA=true
     - node_js: "node"
       env: LINT=true
   allow_failures:
