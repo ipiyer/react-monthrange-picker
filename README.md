@@ -19,7 +19,7 @@
 [deps-url]: https://david-dm.org/munichlinux/react-monthrange-picker
 [dev-deps-svg]:https://david-dm.org/munichlinux/react-monthrange-picker/dev-status.svg
 [dev-deps-url]: https://david-dm.org/munichlinux/react-monthrange-picker?type=dev
-[npm-badge-png]: https://nodei.co/npm/react-dates.png?downloads=true&stars=true
+[npm-badge-png]: https://nodei.co/npm/react-monthrange-picker.png?downloads=true&stars=true
 [license-image]: https://img.shields.io/npm/l/react-monthrange-picker.svg
 [license-url]: LICENSE
 [downloads-image]: https://img.shields.io/npm/dm/react-monthrange-picker.svg
