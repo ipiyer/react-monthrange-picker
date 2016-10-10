@@ -1,5 +1,5 @@
 {
-  "name": "month_range_picker",
+  "name": "react-monthrange-picker",
   "version": "1.0.0",
   "description": "ReactJS Month range picker",
   "main": "dist/calendar.js",
