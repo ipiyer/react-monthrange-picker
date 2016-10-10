@@ -9,7 +9,7 @@
 
 [![npm badge][npm-badge-png]][package-url]
 
-
+[npm-version-svg]: http://versionbadg.es/munichlinux/react-monthrange-picker.svg
 [coveralls-url]: https://coveralls.io/github/munichlinux/react-monthrange-picker?branch=master
 [coveralls-svg]: https://coveralls.io/repos/github/munichlinux/react-monthrange-picker/badge.svg?branch=master
 [travis-svg]: https://travis-ci.org/munichlinux/react-monthrange-picker.svg
