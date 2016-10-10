@@ -1,0 +1,155 @@
+// @import "arrow";
+@import "compass/css3/border-radius"; // variables
+$monthradius: 15px;
+
+#content {
+  position: absolute;
+  left: 400px;
+  top: 200px;
+}
+
+.month-picker {
+  position: relative;
+
+  .btn-plain {
+    background-color: #fff;
+    border: 0 solid;
+  }
+
+  .picker {
+    display: inline-block;
+
+    .date-str {
+      margin: 0 7px;
+
+      .date {
+        margin: 0 5px;
+      }
+    }
+  }
+
+  .sec-wrap {
+    position: relative;
+  }
+
+  .arrow {
+    top: -11px;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #999;
+    border-bottom-color: rgba(0,0,0,.25);
+
+    &:after {
+      top: 1px;
+      margin-left: -10px;
+      content: " ";
+      border-top-width: 0;
+      border-bottom-color: #fff;
+    }
+  }
+
+  .popover {
+    max-width: inherit;
+    padding: 10px 0;
+  }
+
+  div.head {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+
+    .title {
+      button {
+        margin-top: -7px;
+
+        i {
+          font-size: 1.5em;
+          color: #999999;
+        }
+
+        &:hover {
+          i {
+            color: #555;
+          }
+        }
+      }
+
+      span.text {
+        width: 50%;
+        display: inline-block;
+      }
+    }
+  }
+
+  .shortcuts {
+    padding: 0 10px 0 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .calendar {
+    padding: 0 10px 0 0;
+
+    .year {
+      padding: 3px 2px 3px 10px;
+      border-right: solid #999 1px;
+
+      &.year-start .selected {
+        @include border-top-left-radius($monthradius);
+      }
+
+      &.year-end .selected {
+        @include border-bottom-right-radius($monthradius);
+      }
+    }
+
+    .mpr-calendar::last-child {
+      border-right: none;
+    }
+
+    .months {
+      button {
+        text-transform: uppercase;
+        display: inline-block;
+        color: #000;
+        background-color: transparent;
+      }
+
+      .month {
+        text-align: center;
+        width: 24%;
+        float: left;
+        display: inline-block;
+        margin: 0.5px;
+        padding: 0;
+        font-size: 0.9em;
+        border: 1px solid transparent;
+
+        button {
+          padding: 15px;
+        }
+
+        &:hover {
+          border-color: #CCC;
+        }
+
+        &.highlight {
+          background-color: rgba(64,102,122,.5);
+
+          button {
+            color: #fff;
+          }
+        }
+
+        &.selected {
+          background-color: rgb(64, 102, 122);
+
+          button {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

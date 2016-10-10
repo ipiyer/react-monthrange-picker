@@ -1,0 +1,122 @@
+#content {
+  position: absolute;
+  left: 400px;
+  top: 200px;
+}
+
+.month-picker {
+  position: relative;
+}
+.month-picker .btn-plain {
+  background-color: #fff;
+  border: 0 solid;
+}
+.month-picker .picker {
+  display: inline-block;
+}
+.month-picker .picker .date-str {
+  margin: 0 7px;
+}
+.month-picker .picker .date-str .date {
+  margin: 0 5px;
+}
+.month-picker .sec-wrap {
+  position: relative;
+}
+.month-picker .arrow {
+  top: -11px;
+  margin-left: -11px;
+  border-top-width: 0;
+  border-bottom-color: #999;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+}
+.month-picker .arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-width: 0;
+  border-bottom-color: #fff;
+}
+.month-picker .popover {
+  max-width: inherit;
+  padding: 10px 0;
+}
+.month-picker div.head {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+.month-picker div.head .title button {
+  margin-top: -7px;
+}
+.month-picker div.head .title button i {
+  font-size: 1.5em;
+  color: #999999;
+}
+.month-picker div.head .title button:hover i {
+  color: #555;
+}
+.month-picker div.head .title span.text {
+  width: 50%;
+  display: inline-block;
+}
+.month-picker .shortcuts {
+  padding: 0 10px 0 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.month-picker .calendar {
+  padding: 0 10px 0 0;
+}
+.month-picker .calendar .year {
+  padding: 3px 2px 3px 10px;
+  border-right: solid #999 1px;
+}
+.month-picker .calendar .year.year-start .selected {
+  -moz-border-radius-topleft: 15px;
+  -webkit-border-top-left-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.month-picker .calendar .year.year-end .selected {
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.month-picker .calendar .mpr-calendar::last-child {
+  border-right: none;
+}
+.month-picker .calendar .months button {
+  text-transform: uppercase;
+  display: inline-block;
+  color: #000;
+  background-color: transparent;
+}
+.month-picker .calendar .months .month {
+  text-align: center;
+  width: 24%;
+  float: left;
+  display: inline-block;
+  margin: 0.5px;
+  padding: 0;
+  font-size: 0.9em;
+  border: 1px solid transparent;
+}
+.month-picker .calendar .months .month button {
+  padding: 15px;
+}
+.month-picker .calendar .months .month:hover {
+  border-color: #CCC;
+}
+.month-picker .calendar .months .month.highlight {
+  background-color: rgba(64, 102, 122, 0.5);
+}
+.month-picker .calendar .months .month.highlight button {
+  color: #fff;
+}
+.month-picker .calendar .months .month.selected {
+  background-color: #40667a;
+}
+.month-picker .calendar .months .month.selected button {
+  color: #fff;
+}

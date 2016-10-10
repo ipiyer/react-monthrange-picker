@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - "6"
+  - "4.2"
+before_script:
+  - 'if [ "${TRAVIS_NODE_VERSION}" = 6 ]; then export DISPLAY=:99.0; fi'
+  - 'if [ "${TRAVIS_NODE_VERSION}" = 6 ]; then sh -e /etc/init.d/xvfb start; fi'
+  - 'if [ "${TRAVIS_NODE_VERSION}" = 6 ]; then sleep 3; fi'
+script:
+  - 'if [ -n "${LINT-}" ]; then npm run lint ; fi'
+  - 'if [ -n "${TEST-}" ]; then npm run test ; fi'
+after_success:
+  - 'if [ "${TRAVIS_NODE_VERSION}" = "4.2" ]; then cat ./coverage/ui-coverage/report-lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js ; fi'
+env:
+  global:
+    - REACT=0.15
+  matrix:
+    - TEST=true
+sudo: false
+matrix:
+  fast_finish: true
+  include:
+    - node_js: "node"
+      env: LINT=true
+  allow_failures:
+    - node_js: "iojs"
