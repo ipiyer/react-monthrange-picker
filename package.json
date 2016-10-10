@@ -16,7 +16,10 @@
     "reactjs",
     "month",
     "range",
-    "picker"
+    "picker",
+    "calendar",
+    "react-component",
+    "month picker"
   ],
   "author": "Prashanth Iyer <munichlinux@gmail.com>",
   "license": "MIT",

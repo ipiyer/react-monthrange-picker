@@ -141,7 +141,7 @@ gulp.task('server', function() {
 });
 
 gulp.task('clean-dist', function() {
-  return del('dist');
+  return del(['dist', 'coverage']);
 });
 
 gulp.task("dev", ["server", "build-example-vendor", "build-example-css",
