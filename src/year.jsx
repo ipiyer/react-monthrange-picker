@@ -43,12 +43,11 @@ class YearBase extends React.Component {
     this.props.currYear.add(n, 'y');
     const currYear = this.props.currYear.format('YYYY');
 
-    this.setState({ currYear });
-
     if (this.props.onYearChange) {
       this.props.onYearChange(currYear);
     }
 
+    this.setState({ currYear });
     return true;
   }
   selectMonth(e) {
@@ -58,6 +57,9 @@ class YearBase extends React.Component {
     const selectedMonth = parseInt(target.data('idx'), 10);
     // this is either start or end of the moment range
     this.datePoint.month(selectedMonth).year(this.state.currYear);
+    // passing selectedDateRange because the app should get the range rather
+    // than start or end of the range.
+    // this.datePoint is a reference to the prop selectedDateRange
     this.props.onSelect(this.props.selectedDateRange);
   }
   render() {
@@ -67,11 +69,9 @@ class YearBase extends React.Component {
 
     newDate.setYear(currYear);
     newDate.setDate(1);
-
     const months = MONTHS.map((month, idx) => {
       newDate.setMonth(idx);
       let selection = '';
-
       if (currYear === this.datePoint.format('YYYY') && month === this.datePoint.format('MMM')) {
         selection = 'selected';
       } else if (selectedRange.contains(newDate, true)) {
@@ -122,11 +122,11 @@ class YearBase extends React.Component {
 }
 
 YearBase.propTypes = {
-  restrictionRange: CustomPropTypes.MomentRangeType,
-  currYear: CustomPropTypes.MomentType,
-  selectedDateRange: CustomPropTypes.MomentRangeType,
+  restrictionRange: CustomPropTypes.MomentRangeType.isRequired,
+  currYear: CustomPropTypes.MomentType.isRequired,
+  selectedDateRange: CustomPropTypes.MomentRangeType.isRequired,
   onYearChange: React.PropTypes.func,
-  onSelect: React.PropTypes.func,
+  onSelect: React.PropTypes.func.isRequired,
 };
 
 class YearStart extends YearBase {
