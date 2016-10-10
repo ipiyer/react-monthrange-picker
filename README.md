@@ -1,6 +1,6 @@
 # react-monthrange-picker <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
-[![Coverage Status][travis-svg]][travis-url]
+[![Coverage Status][coveralls-svg]][coveralls-url]
 [![Build Status][travis-svg]][travis-url]
 [![dependency status][deps-svg]][deps-url]
 [![dev dependency status][dev-deps-svg]][dev-deps-url]
