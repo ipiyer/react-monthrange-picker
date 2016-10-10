@@ -6,8 +6,12 @@
 [![dev dependency status][dev-deps-svg]][dev-deps-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
-
 [![npm badge][npm-badge-png]][package-url]
+
+![react-monthrange-picker in action](https://raw.githubusercontent.com/munichlinux/react-monthrange-picker/master/react-picker.gif)
+![react-monthrange-picker corner location](https://raw.githubusercontent.com/munichlinux/react-monthrange-picker/master/picker-corner.gif)
+
+## Live Playground
 
 [npm-version-svg]: http://versionbadg.es/munichlinux/react-monthrange-picker.svg
 [coveralls-url]: https://coveralls.io/github/munichlinux/react-monthrange-picker?branch=master
