@@ -1,6 +1,6 @@
 {
   "name": "react-monthrange-picker",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ReactJS Month range picker",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "cover:clean": "node_modules/rimraf/bin.js coverage",
     "lint": "node_modules/eslint/bin/eslint.js --ext .js,.jsx src test",
     "test": "node_modules/karma/bin/karma start",
-    "prepublish": "node_modules/gulp/bin/gulp.js dist",
+    "prepublish": "in-publish && safe-publish-latest && npm run build || not-in-publish",
     "dev": "node_modules/gulp/bin/gulp.js dev",
     "tag": "git tag v$npm_package_version",
     "version:patch": "npm --no-git-tag-version version patch",
@@ -20,11 +20,14 @@
     "check-changelog": "expr $(git status --porcelain 2>/dev/null| grep \"^\\s*M.*CHANGELOG.md\" | wc -l) >/dev/null || (echo 'Please edit CHANGELOG.md' && exit 1)",
     "check-only-changelog-changed": "(expr $(git status --porcelain 2>/dev/null| grep -v \"CHANGELOG.md\" | wc -l) >/dev/null && echo 'Only CHANGELOG.md may have uncommitted changes' && exit 1) || exit 0",
     "preversion": "npm run test && npm run check-changelog && npm run check-only-changelog-changed",
-    "postversion": "git commit package.json CHANGELOG.md -m \"Version $npm_package_version\" && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/",
-    "prepublish": "in-publish && safe-publish-latest && npm run build || not-in-publish"
+    "postversion": "git commit package.json CHANGELOG.md -m \"Version $npm_package_version\" && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/"
   },
   "files": [
-    "examaples", "src", "test", "dist", "lib"
+    "examaples",
+    "src",
+    "test",
+    "dist",
+    "lib"
   ],
   "repository": {
     "type": "git",
