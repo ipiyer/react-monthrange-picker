@@ -1,5 +1,3 @@
 var App = require("./lib/app").default;
 
-module.exports = {
-  App: App,
-};
+module.exports = App;

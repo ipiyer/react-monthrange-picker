@@ -24,7 +24,7 @@
     "prepublish": "in-publish && safe-publish-latest && npm run build || not-in-publish"
   },
   "files": [
-    "examaples", "src", "test", "dist"
+    "examaples", "src", "test", "dist", "lib"
   ],
   "repository": {
     "type": "git",
