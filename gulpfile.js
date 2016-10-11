@@ -60,49 +60,17 @@ const appDeps = Object.keys(packageManifest.dependencies);
     .on('error', gutil.log.bind(gutil, "Browserify Vendor Error"))
     .pipe(source('vendor_bundle.js'))
 
-
-  gulp.task('build-dist-vendor', function() {
-    bundleV().pipe(gulp.dest("./dist"));
-  });
-
   gulp.task('build-example-vendor', function() {
     bundleV().pipe(gulp.dest("./example/"));
   });
 })();
 
-gulp.task('build-dist-js', function() {
-  var b = browserify({
-    entries: ['./src/index.app'],
-    extensions: ['.js', '.jsx'],
-    debug: true,
-    standalone: "App"
-  });
+gulp.task('build-example-js', bundle);
 
-  b.external(appDeps);
-  b.transform(babelify.configure({
-    presets: ["es2015", "react"]
-  }));
-
-  b.bundle()
-    .on('error', gutil.log.bind(gutil, "Browserify Error"))
-    .pipe(source('./calendar.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({
-      loadMaps: true
-    }))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./dist'));
-});
-
-
-gulp.task('example-js', bundle);
 var customOpts = {
   entries: ["./example/month_picker.jsx"],
-  noParse: [path.resolve("./dist/calendar.js")],
   extensions: ['.js', '.jsx'],
-  debug: true,
-  cache: {},
-  packageCache: {}
+  debug: true
 };
 
 var opts = assign({}, watchify.args, customOpts);
@@ -138,19 +106,18 @@ gulp.task('server', function() {
   });
 });
 
-gulp.task('clean-dist', function() {
-  return del(['dist', 'coverage']);
+gulp.task('clean', function() {
+  return del(['dist', 'coverage', './example/css', "./example/bundle.*",
+    "lib"
+  ]);
 });
 
-gulp.task("dev", ["dist", "server", "build-example-vendor", "build-example-css",
-  "example-js", "watch"
+gulp.task("dev", ["server", "build-example-vendor", "build-example-js",
+  "build-example-css"
 ]);
 
-gulp.task("dist", function(callback) {
-  runSequence(['clean-dist', 'build-dist-vendor', 'build-dist-css',
-      'build-dist-js'
-    ],
-    callback);
+gulp.task("dist:css", function(callback) {
+  runSequence(['build-dist-css'], callback);
 });
 
 gulp.task('watch', function() {

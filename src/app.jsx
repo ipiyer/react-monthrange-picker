@@ -100,4 +100,4 @@ App.defaultProps = {
   display: false,
 };
 
-module.exports = App;
+export default App;

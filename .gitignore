@@ -1,5 +1,6 @@
 .DS_Store
 .nodemonignore
+lib/
 .sass-cache/
 *.log
 *.csv

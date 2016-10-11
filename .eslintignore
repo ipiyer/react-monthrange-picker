@@ -1,3 +1,4 @@
 dist/
 karma.conf.js
 gulpfile.js
+index.js
