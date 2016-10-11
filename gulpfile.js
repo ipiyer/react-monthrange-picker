@@ -21,7 +21,8 @@ const gulp = require("gulp"),
   sourcemaps = require('gulp-sourcemaps'),
   packageManifest = require('./package.json'),
   es = require('event-stream'),
-  runSequence = require("run-sequence");
+  runSequence = require("run-sequence"),
+  path = require('path');
 
 (function() {
   var css = () => gulp.src(paths.sass)
@@ -55,29 +56,27 @@ const appDeps = Object.keys(packageManifest.dependencies);
 
   b.require(appDeps);
 
-  var bundleV = b.bundle()
+  var bundleV = () => b.bundle()
     .on('error', gutil.log.bind(gutil, "Browserify Vendor Error"))
     .pipe(source('vendor_bundle.js'))
 
 
   gulp.task('build-dist-vendor', function() {
-    bundleV.pipe(gulp.dest("./dist"));
+    bundleV().pipe(gulp.dest("./dist"));
   });
 
   gulp.task('build-example-vendor', function() {
-    bundleV.pipe(gulp.dest("./example/"));
+    bundleV().pipe(gulp.dest("./example/"));
   });
 })();
 
 gulp.task('build-dist-js', function() {
   var b = browserify({
-    entries: ['./src/index.app.jsx'],
+    entries: ['./src/index.app'],
     extensions: ['.js', '.jsx'],
     debug: true,
-    cache: {},
-    packageCache: {}
+    standalone: "App"
   });
-
 
   b.external(appDeps);
   b.transform(babelify.configure({
@@ -86,21 +85,20 @@ gulp.task('build-dist-js', function() {
 
   b.bundle()
     .on('error', gutil.log.bind(gutil, "Browserify Error"))
-    .pipe(source('calendar.js'))
+    .pipe(source('./calendar.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({
       loadMaps: true
     }))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./dist'))
-    .pipe(livereload());
+    .pipe(gulp.dest('./dist'));
 });
 
 
 gulp.task('example-js', bundle);
-
 var customOpts = {
   entries: ["./example/month_picker.jsx"],
+  noParse: [path.resolve("./dist/calendar.js")],
   extensions: ['.js', '.jsx'],
   debug: true,
   cache: {},
@@ -144,7 +142,7 @@ gulp.task('clean-dist', function() {
   return del(['dist', 'coverage']);
 });
 
-gulp.task("dev", ["server", "build-example-vendor", "build-example-css",
+gulp.task("dev", ["dist", "server", "build-example-vendor", "build-example-css",
   "example-js", "watch"
 ]);
 

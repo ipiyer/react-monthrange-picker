@@ -1,5 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from '../src/index.app';
+import { App } from './../dist/calendar';
 
-render(<App display={false} />, document.getElementById('content'));
+render(<App />, document.getElementById('content'));

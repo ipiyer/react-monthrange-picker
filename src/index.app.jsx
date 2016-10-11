@@ -1,3 +1,2 @@
 import App from './app';
-
-export default App;
+module.exports = { App };
