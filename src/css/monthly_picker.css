@@ -1,9 +1,3 @@
-#content {
-  position: absolute;
-  left: 900px;
-  top: 200px;
-}
-
 .month-picker {
   position: relative;
 }
