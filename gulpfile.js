@@ -113,7 +113,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task("dev", ["server", "build-example-vendor", "build-example-js",
-  "build-example-css"
+  "build-example-css", "watch"
 ]);
 
 gulp.task("dist:css", function(callback) {

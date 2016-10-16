@@ -14,7 +14,6 @@ class Calendar extends React.Component {
       left: '0px',
       display: props.display ? 'block' : 'none',
     };
-    this.arrowStyle = {};
     const { selectedDateRange, restrictionRange } = props;
     // using state here because on month selection
     // both yearstart and yearend gets re-rendered
@@ -39,32 +38,44 @@ class Calendar extends React.Component {
   }
   setStyle(props) {
     const calStyle = _.cloneDeep(this.calStyle);
-    const arrowStyle = _.cloneDeep(this.arrowStyle);
-
     const picker = this.$el.siblings('.picker');
-    const arrow = this.$el.find('.arrow');
+    const direction = this.props.direction;
+    const adjustmentConstant = 10;
 
-    // container is position relative;
-    const top = picker.height() + arrow.outerHeight() + 20;
+    const calDim = {
+      height: this.$el.height(),
+      width: this.$el.width(),
+    };
 
-    //
-    const pickerProximity = $(window).width() - (picker.offset().left + this.$el.width());
+    const pickerDim = {
+      height: picker.height(),
+      width: picker.width(),
+    };
 
-    const pickerWidthHalf = `${picker.width() / 2}px`;
 
-    // picker is at the right corner of the window.
-    // add negative left to the popover.
-    if (pickerProximity < 0) {
-      calStyle.left = `${pickerProximity - 20}px`;
-      arrowStyle.right = pickerWidthHalf;
-    } else {
-      arrowStyle.left = pickerWidthHalf;
+    if (direction === 'left' || direction === 'right') {
+      calStyle.top = `-${calDim.height / 2}px`;
+      if (direction === 'left') {
+        const leftWidth = calDim.width + adjustmentConstant;
+
+        calStyle.left = `-${leftWidth}px`;
+      } else {
+        const rightWidth = pickerDim.width + adjustmentConstant;
+        calStyle.left = `${rightWidth}px`;
+      }
+    } else if (direction === 'top' || direction === 'bottom') {
+      calStyle.left = `-${(calDim.width - pickerDim.width) / 2}px`;
+
+      if (direction === 'top') {
+        const top = calDim.height + pickerDim.height;
+        calStyle.top = `-${top}px`;
+      } else {
+        const top = pickerDim.height + adjustmentConstant;
+        calStyle.top = `${top}px`;
+      }
     }
 
-    calStyle.top = top < 0 ? 0 : `${top}px`;
-
     calStyle.display = props.display ? 'block' : 'none';
-    this.arrowStyle = arrowStyle;
     this.calStyle = calStyle;
   }
   selectMonth(newDateRange) {
@@ -72,7 +83,6 @@ class Calendar extends React.Component {
     if (newDateRangeClone.start > newDateRangeClone.end) {
       newDateRangeClone.end = newDateRangeClone.start.clone();
     }
-
     if (this.props.onSelect) {
       this.props.onSelect(newDateRangeClone);
     }
@@ -84,10 +94,11 @@ class Calendar extends React.Component {
     const selectedRange = this.state.selectedDateRange.clone();
     const startDate = selectedRange.start;
     const endDate = selectedRange.end;
+    const popOverClass = `${this.props.direction} popover`;
 
     return (
-      <div ref={node => (this.node = node)} className="popover" style={this.calStyle}>
-        <div className="arrow" style={this.arrowStyle} />
+      <div ref={node => (this.node = node)} className={popOverClass} style={this.calStyle}>
+        <div className="arrow" />
         <div className="clearfix sec-wrap">
           <div className="calendar col-xs-10">
             <div className="clearfix">
@@ -136,6 +147,7 @@ class Calendar extends React.Component {
 Calendar.propTypes = {
   selectedDateRange: CustomPropTypes.MomentRangeType.isRequired,
   restrictionRange: CustomPropTypes.MomentRangeType.isRequired,
+  direction: React.PropTypes.oneOf(['top', 'left', 'right', 'bottom']).isRequired,
   display: React.PropTypes.bool.isRequired,
   onSelect: React.PropTypes.func.isRequired,
   onApply: React.PropTypes.func.isRequired,

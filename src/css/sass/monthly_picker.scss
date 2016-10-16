@@ -25,22 +25,6 @@
     position: relative;
   }
 
-  .arrow {
-    top: -11px;
-    margin-left: -11px;
-    border-top-width: 0;
-    border-bottom-color: $arrow_color;
-    border-bottom-color: $arrow_border_color;
-
-    &:after {
-      top: 1px;
-      margin-left: -10px;
-      content: " ";
-      border-top-width: 0;
-      border-bottom-color: #fff;
-    }
-  }
-
   .popover {
     max-width: inherit;
     padding: 10px 0;

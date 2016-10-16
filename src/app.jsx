@@ -16,6 +16,7 @@ class App extends React.Component {
 
     const { selectedDateRange, restrictionRange, display } = props;
     this.state = { selectedDateRange, restrictionRange, display };
+    this.selectedDateRange = selectedDateRange.clone();
   }
   componentDidMount() {
     if (this.props.onRender) {
@@ -32,11 +33,12 @@ class App extends React.Component {
   }
   onApply() {
     if (this.props.onApply) {
-      this.state.selectedDateRange = this.props.onApply(this.selectedDateRange);
-    } else {
-      // what ever was selected currently gets applied
-      this.state.selectedDateRange = this.selectedDateRange;
+      this.props.onApply(this.selectedDateRange);
     }
+
+    // what ever was selected currently gets applied
+    this.state.selectedDateRange = this.selectedDateRange;
+
     this.state.display = false;
     this.setState(this.state);
   }
@@ -69,6 +71,7 @@ class App extends React.Component {
           onSelect={this.onSelectFn}
           onApply={this.onApplyFn}
           onCancel={this.onCancelFn}
+          direction={this.props.direction}
           onYearChange={this.props.onYearChange}
         />
       </div>
@@ -85,6 +88,7 @@ App.propTypes = {
   onApply: React.PropTypes.func,
   onCancel: React.PropTypes.func,
   display: React.PropTypes.bool,
+  direction: React.PropTypes.oneOf(['top', 'left', 'right', 'bottom']),
 };
 
 const date = new Date();
@@ -98,6 +102,7 @@ App.defaultProps = {
   selectedDateRange: moment.range(startDate, endDate),
   restrictionRange: moment.range(minDate, maxDate),
   display: false,
+  direction: 'bottom',
 };
 
 export default App;
