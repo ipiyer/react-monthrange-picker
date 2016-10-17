@@ -1,8 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { shallow, mount, render } from 'enzyme';
-import moment from 'moment';
+import { mount } from 'enzyme';
 
 import App from '../../src/app';
 
