@@ -11,9 +11,9 @@
 ![react-monthrange-picker    bottom](https://raw.githubusercontent.com/munichlinux/react-monthrange-picker/master/direction_bottom.gif)
 ![react-monthrange-picker  left](https://raw.githubusercontent.com/munichlinux/react-monthrange-picker/master/direction_left.gif)
 
-## Live Playground
+## Example
 
-For example of how to use [react-monthrange-picker](http://https://github.com/munichlinux/react-monthrange-picker) in your application look at [example application](http://https://github.com/munichlinux/monthrange-picker-example)
+For example of how to use [react-monthrange-picker](http://https://github.com/munichlinux/react-monthrange-picker) in your application look at [example application](https://github.com/munichlinux/react-monthrange-picker-example)
 
 OR
 
