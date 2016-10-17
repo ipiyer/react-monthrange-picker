@@ -1,12 +1,5 @@
-// @import "arrow";
-@import "compass/css3/border-radius"; // variables
-$monthradius: 15px;
-
-#content {
-  position: absolute;
-  left: 900px;
-  top: 200px;
-}
+@import "compass/css3/border-radius";
+@import "variables";
 
 .month-picker {
   position: relative;
@@ -32,22 +25,6 @@ $monthradius: 15px;
     position: relative;
   }
 
-  .arrow {
-    top: -11px;
-    margin-left: -11px;
-    border-top-width: 0;
-    border-bottom-color: #999;
-    border-bottom-color: rgba(0,0,0,.25);
-
-    &:after {
-      top: 1px;
-      margin-left: -10px;
-      content: " ";
-      border-top-width: 0;
-      border-bottom-color: #fff;
-    }
-  }
-
   .popover {
     max-width: inherit;
     padding: 10px 0;
@@ -64,7 +41,7 @@ $monthradius: 15px;
 
         i {
           font-size: 1.5em;
-          color: #999999;
+          color: $arrow_color;
         }
 
         &:hover {
@@ -96,11 +73,11 @@ $monthradius: 15px;
       border-right: solid #999 1px;
 
       &.year-start .selected {
-        @include border-top-left-radius($monthradius);
+        @include border-top-left-radius($month_selection_border_radius);
       }
 
       &.year-end .selected {
-        @include border-bottom-right-radius($monthradius);
+        @include border-bottom-right-radius($month_selection_border_radius);
       }
     }
 
@@ -135,7 +112,7 @@ $monthradius: 15px;
         }
 
         &.highlight {
-          background-color: rgba(64,102,122,.5);
+          background-color: $highlight_month;
 
           button {
             color: #fff;
@@ -143,7 +120,7 @@ $monthradius: 15px;
         }
 
         &.selected {
-          background-color: rgb(64, 102, 122);
+          background-color: $selected_month;
 
           button {
             color: #fff;

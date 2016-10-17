@@ -1,7 +1,6 @@
 #content {
-  position: absolute;
-  left: 900px;
-  top: 200px;
+  margin-top: 200px;
+  margin-left: 400px;
 }
 
 .month-picker {
@@ -23,20 +22,6 @@
 .month-picker .sec-wrap {
   position: relative;
 }
-.month-picker .arrow {
-  top: -11px;
-  margin-left: -11px;
-  border-top-width: 0;
-  border-bottom-color: #999;
-  border-bottom-color: rgba(0, 0, 0, 0.25);
-}
-.month-picker .arrow:after {
-  top: 1px;
-  margin-left: -10px;
-  content: " ";
-  border-top-width: 0;
-  border-bottom-color: #fff;
-}
 .month-picker .popover {
   max-width: inherit;
   padding: 10px 0;
@@ -51,7 +36,7 @@
 }
 .month-picker div.head .title button i {
   font-size: 1.5em;
-  color: #999999;
+  color: #999;
 }
 .month-picker div.head .title button:hover i {
   color: #555;

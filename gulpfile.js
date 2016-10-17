@@ -29,7 +29,7 @@ const gulp = require("gulp"),
     .pipe(plugins.compass({
       css: 'src/css',
       sass: 'src/css/sass',
-      import_path: 'src/css/sass_includes'
+      import_path: 'src/css/sass_import'
     }))
     .once('error', function(err) {
       console.log(err);
@@ -41,7 +41,7 @@ const gulp = require("gulp"),
   });
 
   gulp.task("build-dist-css", function() {
-    css().pipe(gulp.dest('./dist/css'));
+    css().pipe(gulp.dest('./lib/css'));
   });
 })();
 
@@ -113,7 +113,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task("dev", ["server", "build-example-vendor", "build-example-js",
-  "build-example-css"
+  "build-example-css", "watch"
 ]);
 
 gulp.task("dist:css", function(callback) {

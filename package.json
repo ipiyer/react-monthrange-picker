@@ -22,6 +22,7 @@
     "preversion": "npm run test && npm run check-changelog && npm run check-only-changelog-changed",
     "postversion": "git commit package.json CHANGELOG.md -m \"Version $npm_package_version\" && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/"
   },
+  "style": "./lib/css/monthly_picker.css",
   "files": [
     "examaples",
     "src",
