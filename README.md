@@ -9,7 +9,7 @@
 [![npm badge][npm-badge-png]][package-url]
 
 ![react-monthrange-picker    bottom](https://raw.githubusercontent.com/munichlinux/react-monthrange-picker/master/direction_bottom.gif)
-![react-monthrange-picker  left](https://raw.githubusercontent.com/munichlinux/react-monthrange-picker/master/picker-corner.gif)
+![react-monthrange-picker  left](https://raw.githubusercontent.com/munichlinux/react-monthrange-picker/master/direction_left.gif)
 
 ## Live Playground
 
