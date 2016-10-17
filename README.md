@@ -31,7 +31,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
 
 #### `Props`
 
-***selectedDateRange:***
+##### selectedDateRange
 
 [MomentRange](https://github.com/gf3/moment-range) object representing the current selected date range or initial date range of the calendar. Defaults to the current year.
 
@@ -39,7 +39,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   selectedDateRange: CustomPropTypes.MomentRangeType
 ```
 
-***restrictionRange:***
+##### restrictionRange
 
 [MomentRange](https://github.com/gf3/moment-range) object which restricts the calendar between start and the end date. Defaults between 2000 and 4 years from now.
 
@@ -47,7 +47,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   restrictionRange: CustomPropTypes.MomentRangeType
 ```
 
-***direction:***
+##### direction
 
 `direction` is the opening direction of the calendar.
 
@@ -55,7 +55,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   direction: React.PropTypes.oneOf(['top', 'left', 'right', 'bottom'])
 ```
 
-***onYearChange:***
+##### onYearChange
 
 `onYearChange` is a callback fn triggered when the calendar year changes.
 
@@ -63,7 +63,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   onYearChange: React.PropTypes.func
 ```
 
-***onRender:***
+##### onRender
 
 `onRender` is a callback fn triggered when the app rendered first.
 
@@ -71,7 +71,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   onRender: React.PropTypes.func
 ```
 
-***onSelect:***
+##### onSelect
 
 `onSelect` is a callback fn triggered when the user selection changes, the fn is called with the current selection range of type `CustomPropTypes.MomentRangeType`.
 
@@ -79,7 +79,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   onSelect: React.PropTypes.func
 ```
 
-***onApply:***
+##### onApply
 
 `onApply` is a callback fn triggered when the user clicks the apply button.
 
@@ -87,7 +87,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   onApply: React.PropTypes.func
 ```
 
-***onCancel:***
+##### onCancel
 
 `onCancel` is a callback fn triggered when the user clicks the cancel button.
 
@@ -95,7 +95,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   onCancel: React.PropTypes.func
 ```
 
-***display:***
+##### display
 
 `display` defaults to false, display true would show the calendar when rendered first.
 
