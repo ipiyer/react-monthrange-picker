@@ -1,6 +1,6 @@
 {
   "name": "react-monthrange-picker",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "ReactJS Month range picker",
   "main": "index.js",
   "scripts": {
