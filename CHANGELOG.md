@@ -1,7 +1,7 @@
 # Change Log
 
 
-## 1.2.0
+## 1.3
 
 * Improving test coverage.
 * Adding direction prop type.
