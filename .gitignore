@@ -25,3 +25,4 @@ coverage
 example/*
 !example/index.html
 !example/*.jsx
+src/css/*.css

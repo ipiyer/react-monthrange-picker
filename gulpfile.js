@@ -108,7 +108,7 @@ gulp.task('server', function() {
 
 gulp.task('clean', function() {
   return del(['dist', 'coverage', './example/css', "./example/bundle.*",
-    "lib"
+    "lib", ".sass-cache", "src/css/*.css"
   ]);
 });
 
