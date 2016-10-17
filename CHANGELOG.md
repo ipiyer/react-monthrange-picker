@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.4.0
+
+* Fixing the css build.
 
 ## 1.3.0
 
