@@ -13,7 +13,7 @@
 
 ## Example
 
-For example of how to use [react-monthrange-picker](http://https://github.com/munichlinux/react-monthrange-picker) in your application look at [example application](https://github.com/munichlinux/react-monthrange-picker-example)
+You can either look at the example application [example application](https://github.com/munichlinux/react-monthrange-picker-example)
 
 OR
 
@@ -26,7 +26,7 @@ For simple example:
 ## API
 
 ### `Calendar`
-This component is designed to allow users to to select both start month and end month. It also has functionalities to
+This component is designed to allow users to select both start month and end month. It also has functionalities to
 detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, and calendar positioning.
 
 #### `Props`
@@ -73,7 +73,7 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
 
 ##### onSelect
 
-`onSelect` is a callback fn triggered when the user selection changes, the fn is called with the current selection range of type `CustomPropTypes.MomentRangeType`.
+`onSelect` is a callback fn triggered when the user month selection changes, the fn is called with the current selection range of type `CustomPropTypes.MomentRangeType`.
 
 ```
   onSelect: React.PropTypes.func
