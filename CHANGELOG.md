@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.0
+
+* Updating docs.
+
 ## 1.4.0
 
 * Fixing the css build.
