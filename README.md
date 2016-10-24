@@ -103,6 +103,18 @@ detect varies events like onYearChange, onRender, onSelect, onApply, onCancel, a
   display: React.PropTypes.bool
 ```
 
+##### position
+
+`position` is a way to custom position the element (overrides the centering of calendar).
+
+```
+  position: React.PropTypes.shape({
+    top: React.PropTypes.number,
+    left: React.PropTypes.number,
+  })
+```
+
+
 ## Theming
 
 react-monthrange-picker comes with a set of SCSS variables that can be overridden to add your own project-specific theming. react-monthrange-picker also exports the style with the package.json, so you can bundle the css with [parcelify](https://github.com/rotundasoftware/parcelify). Checkout the [example app](https://github.com/munichlinux/react-monthrange-picker-example)
