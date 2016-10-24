@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.7.0
+
+* Fixing shortcut button class.
+* Fixing styles.
+
 ## 1.6.0
 
 * Adding position proptype.
