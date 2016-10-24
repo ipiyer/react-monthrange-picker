@@ -101,14 +101,14 @@
         margin: 0.5px;
         padding: 0;
         font-size: 0.9em;
-        border: 1px solid transparent;
+        border: 2px solid transparent;
 
         button {
           padding: 15px;
         }
 
         &:hover {
-          border-color: #CCC;
+          border-color: $selected_month;
         }
 
         &.highlight {

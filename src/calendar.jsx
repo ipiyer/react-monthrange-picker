@@ -170,14 +170,14 @@ class Calendar extends React.Component {
             <button
               onClick={this.props.onApply}
               type="button"
-              className="btn btn-default btn-block  btn-success"
+              className="btn btn-block btn-success"
             >
             Apply
             </button>
             <button
               onClick={this.props.onCancel}
               type="button"
-              className="btn btn-default btn-block  btn-default"
+              className="btn btn-default btn-block"
             >
             Cancel
             </button>
