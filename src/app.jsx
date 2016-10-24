@@ -73,6 +73,7 @@ class App extends React.Component {
           onCancel={this.onCancelFn}
           direction={this.props.direction}
           onYearChange={this.props.onYearChange}
+          position={this.props.position}
         />
       </div>
     );
@@ -89,6 +90,10 @@ App.propTypes = {
   onCancel: React.PropTypes.func,
   display: React.PropTypes.bool,
   direction: React.PropTypes.oneOf(['top', 'left', 'right', 'bottom']),
+  position: React.PropTypes.shape({
+    top: React.PropTypes.number,
+    left: React.PropTypes.number,
+  }),
 };
 
 const date = new Date();

@@ -57,7 +57,7 @@ describe('<Calendar/>', () => {
         direction={'top'}
       />);
 
-      const callbackRange = moment.range(new Date(2016, 5, 1), new Date(2016, 5, 1));
+      const callbackRange = moment.range(new Date(2016, 5, 1), new Date(2016, 5, 30));
       wrapper.find('.year-start .cal-month').at(5).simulate('click');
       expect(onSelect.calledWith(sinon.match(val => val.isSame(callbackRange)))).to.equal(true);
     });
