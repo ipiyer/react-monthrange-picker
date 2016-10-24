@@ -8,12 +8,32 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.selectMonthFn = this.selectMonth.bind(this);
+
+    let positionTop;
+
+    try {
+      positionTop = props.position.top;
+    } catch (e) {
+      positionTop = 0;
+    }
+
+    let positionLeft;
+
+    try {
+      positionLeft = props.position.left;
+    } catch (e) {
+      positionLeft = 0;
+    }
+
     this.calStyle = {
       width: '700px',
-      top: '0px',
-      left: '0px',
+      top: `${positionTop}px`,
+      left: `${positionLeft}px`,
       display: props.display ? 'block' : 'none',
     };
+
+    this.arrowStyle = {};
+
     const { selectedDateRange, restrictionRange } = props;
     // using state here because on month selection
     // both yearstart and yearend gets re-rendered
@@ -37,7 +57,24 @@ class Calendar extends React.Component {
     this.setState(this.state);
   }
   setStyle(props) {
+    let positionTop;
+
+    try {
+      positionTop = props.position.top;
+    } catch (e) {
+      positionTop = 0;
+    }
+
+    let positionLeft;
+
+    try {
+      positionLeft = props.position.left;
+    } catch (e) {
+      positionLeft = 0;
+    }
+
     const calStyle = _.cloneDeep(this.calStyle);
+    const arrowStyle = _.cloneDeep(this.arrowStyle);
     const picker = this.$el.siblings('.picker');
     const direction = this.props.direction;
     const adjustmentConstant = 10;
@@ -52,36 +89,43 @@ class Calendar extends React.Component {
       width: picker.width(),
     };
 
-
     if (direction === 'left' || direction === 'right') {
-      calStyle.top = `-${calDim.height / 2}px`;
+      calStyle.top = positionTop ? `${calStyle.top}px` : `-${calDim.height / 2}px`;
       if (direction === 'left') {
         const leftWidth = calDim.width + adjustmentConstant;
 
-        calStyle.left = `-${leftWidth}px`;
+        calStyle.left = positionLeft ? `${calStyle.left}px` : `-${leftWidth}px`;
       } else {
         const rightWidth = pickerDim.width + adjustmentConstant;
-        calStyle.left = `${rightWidth}px`;
+        calStyle.left = positionLeft ? `${calStyle.left}px` : `${rightWidth}px`;
       }
+
+      const arrowTop = Math.abs(parseInt(calStyle.top, 10)) + (pickerDim.height / 2);
+      arrowStyle.top = `${arrowTop}px`;
     } else if (direction === 'top' || direction === 'bottom') {
-      calStyle.left = `-${(calDim.width - pickerDim.width) / 2}px`;
+      calStyle.left = positionLeft ? `${calStyle.left}px` : `-${(calDim.width - pickerDim.width) / 2}px`;
 
       if (direction === 'top') {
         const top = calDim.height + pickerDim.height;
-        calStyle.top = `-${top}px`;
+        calStyle.top = positionTop ? `${calStyle.top}px` : `-${top}px`;
       } else {
         const top = pickerDim.height + adjustmentConstant;
-        calStyle.top = `${top}px`;
+        calStyle.top = positionTop ? `${calStyle.top}px` : `${top}px`;
       }
+      const arrowLeft = Math.abs(parseInt(calStyle.left, 10)) + (pickerDim.width / 2);
+      arrowStyle.left = `${arrowLeft}px`;
     }
 
     calStyle.display = props.display ? 'block' : 'none';
+
     this.calStyle = calStyle;
+    this.arrowStyle = arrowStyle;
   }
   selectMonth(newDateRange) {
     const newDateRangeClone = newDateRange.clone();
     if (newDateRangeClone.start > newDateRangeClone.end) {
-      newDateRangeClone.end = newDateRangeClone.start.clone();
+      newDateRangeClone.end.month(newDateRangeClone.start.month());
+      newDateRangeClone.end.year(newDateRangeClone.start.year());
     }
     if (this.props.onSelect) {
       this.props.onSelect(newDateRangeClone);
@@ -98,7 +142,7 @@ class Calendar extends React.Component {
 
     return (
       <div ref={node => (this.node = node)} className={popOverClass} style={this.calStyle}>
-        <div className="arrow" />
+        <div className="arrow" style={this.arrowStyle} />
         <div className="clearfix sec-wrap">
           <div className="calendar col-xs-10">
             <div className="clearfix">
@@ -153,6 +197,10 @@ Calendar.propTypes = {
   onApply: React.PropTypes.func.isRequired,
   onCancel: React.PropTypes.func.isRequired,
   onYearChange: React.PropTypes.func,
+  position: React.PropTypes.shape({
+    top: React.PropTypes.number,
+    left: React.PropTypes.number,
+  }),
 };
 
 export default Calendar;

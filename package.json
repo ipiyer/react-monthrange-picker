@@ -1,12 +1,13 @@
 {
   "name": "react-monthrange-picker",
-  "version": "1.1.0",
+  "version": "1.6.0",
   "description": "ReactJS Month range picker",
   "main": "index.js",
   "scripts": {
     "build:css": "node_modules/gulp/bin/gulp.js dist:css",
     "build:js": "node_modules/babel-cli/bin/babel.js src -d lib",
-    "build": "node_modules/gulp/bin/gulp.js clean && npm run build:css && npm run build:js",
+    "clean": "node_modules/gulp/bin/gulp.js clean",
+    "build": "npm run clean && npm run build:css && npm run build:js",
     "example": "npm run build && node_modules/gulp/bin/gulp.js dev",
     "cover:clean": "node_modules/rimraf/bin.js coverage",
     "lint": "node_modules/eslint/bin/eslint.js --ext .js,.jsx src test",
