@@ -43,7 +43,7 @@ describe('<app/>', () => {
         onCancel={onCancel}
       />);
 
-      wrapper.find('.shortcuts .btn-default').at(1).simulate('click');
+      wrapper.find('.shortcuts .btn-default').at(0).simulate('click');
       expect(onCancel).to.have.property('callCount', 1);
     });
   });
