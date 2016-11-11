@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.8.0
+
+* Fixing lint, adding skip shape props.
+
+
 ## 1.7.0
 
 * Fixing shortcut button class.
