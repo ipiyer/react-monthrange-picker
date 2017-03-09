@@ -2,10 +2,27 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
+import moment from 'moment';
 
 import App from '../../src/app';
 
+require('moment-range');
+
 describe('<app/>', () => {
+  describe('props check', () => {
+    it('new props should make component re-render', () => {
+      const dateRange = moment.range(new Date(2016, 0, 1), new Date(2016, 11, 31));
+      const changeDateRange = moment.range(new Date(2016, 1, 1), new Date(2016, 11, 31));
+      const wrapper = mount(
+        <App
+          selectedDateRange={dateRange}
+        />
+      );
+      expect(wrapper.find('.year-start .month').at(0).hasClass('selected')).to.equal(true);
+      wrapper.setProps({ selectedDateRange: changeDateRange });
+      expect(wrapper.find('.year-start .month').at(1).hasClass('selected')).to.equal(true);
+    });
+  });
   describe('check callbacks', () => {
     it('onRender', () => {
       const onRender = sinon.spy();

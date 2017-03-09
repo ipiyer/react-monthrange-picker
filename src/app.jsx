@@ -23,6 +23,10 @@ class App extends React.Component {
       this.props.onRender();
     }
   }
+  componentWillReceiveProps(nextProps) {
+    const localState = Object.assign({}, this.state, nextProps);
+    this.setState(localState);
+  }
   onSelect(newDateRange) {
     // so that if the user clicks cancel it doesn't change.
     this.selectedDateRange = newDateRange.clone();

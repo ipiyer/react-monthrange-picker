@@ -13,4 +13,11 @@ const position = {
   top: -90,
 };
 
-render(<App direction="left" position={position} selectedDateRange={selectedDateRange} />, document.getElementById('content'));
+render(
+  <App
+    direction="left"
+    position={position}
+    selectedDateRange={selectedDateRange}
+  />,
+  document.getElementById('content')
+);
