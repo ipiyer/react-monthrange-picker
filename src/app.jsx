@@ -9,6 +9,7 @@ require('moment-range');
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.redraw = props.redraw || false;
     this.handleClickFn = this.handleClick.bind(this);
     this.onSelectFn = this.onSelect.bind(this);
     this.onApplyFn = this.onApply.bind(this);
@@ -17,6 +18,28 @@ class App extends React.Component {
     const { selectedDateRange, restrictionRange, display } = props;
     this.state = { selectedDateRange, restrictionRange, display };
     this.selectedDateRange = selectedDateRange.clone();
+  }
+  componentWillReceiveProps(props) {
+    this.selectedDateRange = props.selectedDateRange.clone();
+    const sameDates = this.props.selectedDateRange.isSame(props.selectedDateRange);
+
+    // update state only if props are different, OR if forced
+    if(this.redraw || !sameDates) {
+      console.log('setting state to redraw', this.selectedDateRange.end.toString());
+      this.state.selectedDateRange = this.selectedDateRange.clone();
+      this.setState(this.state);
+    } else {
+      console.log('blocking redraw');
+    }
+  }
+  componentWillReceiveProps(props) {
+    this.selectedDateRange = props.selectedDateRange.clone();
+    const sameDates = this.props.selectedDateRange.isSame(props.selectedDateRange);
+    // update state only if props are different, OR if forced
+    if(this.redraw || !sameDates) {
+      this.state.selectedDateRange = this.selectedDateRange.clone();
+      this.setState(this.state);
+    }
   }
   componentDidMount() {
     if (this.props.onRender) {
@@ -51,6 +74,11 @@ class App extends React.Component {
     if (this.props.onCancel) {
       this.props.onCancel();
     }
+    this.setState(this.state);
+  }
+  syncData() {
+    // force a redraw by setting state
+    this.state.selectedDateRange = this.selectedDateRange.clone();
     this.setState(this.state);
   }
   handleClick(e) {
