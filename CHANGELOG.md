@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.9.0
+
+* Adding componentWillReceiveProps on app component.
+
+
 ## 1.8.0
 
 * Fixing lint, adding skip shape props.
