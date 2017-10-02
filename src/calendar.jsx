@@ -154,7 +154,7 @@ class Calendar extends React.Component {
       <div ref={node => (this.node = node)} className={popOverClass} style={this.calStyle}>
         {this.props.static || <div className="arrow" style={this.arrowStyle} />}
         <div className="clearfix sec-wrap">
-          <div className="calendar col-xs-10" style={this.props.static && { width: '100%', paddingRight: '0px' }}>
+          <div className="calendar col-xs-10" style={this.props.hideButtons ? { width: '100%', paddingRight: '0px' } : {}}>
             <div className="clearfix">
               <div className="col-xs-6 year-start year">
                 <YearStart
