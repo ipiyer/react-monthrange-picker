@@ -9,6 +9,14 @@ class Calendar extends React.Component {
     super(props);
     this.selectMonthFn = this.selectMonth.bind(this);
 
+    let positionWidth;
+
+    try {
+      positionWidth = props.position.width;
+    } catch (e) {
+      positionWidth = 700;
+    }
+
     let positionTop;
 
     try {
@@ -26,10 +34,10 @@ class Calendar extends React.Component {
     }
 
     this.calStyle = {
-      width: '700px',
+      width: `${positionWidth}px`,
       top: `${positionTop}px`,
       left: `${positionLeft}px`,
-      display: props.display ? 'block' : 'none',
+      display: props.display || props.static ? 'block' : 'none',
     };
 
     this.arrowStyle = {};
@@ -75,13 +83,13 @@ class Calendar extends React.Component {
 
     const calStyle = _.cloneDeep(this.calStyle);
     const arrowStyle = _.cloneDeep(this.arrowStyle);
-    const picker = this.$el.siblings('.picker');
+    const picker = $(this.el).siblings('.picker');
     const direction = this.props.direction;
     const adjustmentConstant = 10;
 
     const calDim = {
-      height: this.$el.height(),
-      width: this.$el.width(),
+      height: $(this.el).height(),
+      width: $(this.el).width(),
     };
 
     const pickerDim = {
@@ -118,6 +126,8 @@ class Calendar extends React.Component {
 
     calStyle.display = props.display ? 'block' : 'none';
 
+    Object.assign(calStyle, props.calStyle);
+
     this.calStyle = calStyle;
     this.arrowStyle = arrowStyle;
   }
@@ -142,9 +152,9 @@ class Calendar extends React.Component {
 
     return (
       <div ref={node => (this.node = node)} className={popOverClass} style={this.calStyle}>
-        <div className="arrow" style={this.arrowStyle} />
+        {this.props.static || <div className="arrow" style={this.arrowStyle} />}
         <div className="clearfix sec-wrap">
-          <div className="calendar col-xs-10">
+          <div className="calendar col-xs-10" style={this.props.static && { width: '100%', paddingRight: '0px' }}>
             <div className="clearfix">
               <div className="col-xs-6 year-start year">
                 <YearStart
@@ -166,6 +176,7 @@ class Calendar extends React.Component {
               </div>
             </div>
           </div>
+          {this.props.hideButtons ||
           <div className="shortcuts col-xs-2">
             <button
               onClick={this.props.onApply}
@@ -182,6 +193,7 @@ class Calendar extends React.Component {
             Cancel
             </button>
           </div>
+          }
         </div>
       </div>
     );
@@ -194,13 +206,16 @@ Calendar.propTypes = {
   direction: React.PropTypes.oneOf(['top', 'left', 'right', 'bottom']).isRequired,
   display: React.PropTypes.bool.isRequired,
   onSelect: React.PropTypes.func.isRequired,
-  onApply: React.PropTypes.func.isRequired,
-  onCancel: React.PropTypes.func.isRequired,
+  onApply: React.PropTypes.func,
+  onCancel: React.PropTypes.func,
   onYearChange: React.PropTypes.func,
   position: React.PropTypes.shape({
-    top: React.PropTypes.number,
-    left: React.PropTypes.number,
+    width: React.PropTypes.string,
+    top: React.PropTypes.string,
+    left: React.PropTypes.string,
   }),
+  static: React.PropTypes.bool,
+  hideButtons: React.PropTypes.bool,
 };
 
 export default Calendar;
