@@ -126,6 +126,14 @@
             color: #fff;
           }
         }
+
+        &.disabled {
+          background-color: lightgray;
+          
+          button {
+            color: gray;
+          }
+        }
       }
     }
   }

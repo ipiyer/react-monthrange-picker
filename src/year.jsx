@@ -65,6 +65,7 @@ class YearBase extends React.Component {
   render() {
     const currYear = this.state.currYear;
     const selectedRange = this.props.selectedDateRange;
+    const restrictionRange = this.props.restrictionRange;
     const newDate = new Date();
 
     newDate.setYear(currYear);
@@ -77,13 +78,16 @@ class YearBase extends React.Component {
       } else if (selectedRange.contains(newDate, true)) {
         selection = 'highlight';
       }
+      if (!restrictionRange.contains(newDate, false)) {
+        selection = 'disabled';
+      }
 
       return (
         <span key={Date.now() + idx} className={`${selection} month`}>
           <button
             className="cal-month btn btn-plain"
             data-idx={idx}
-            onClick={this.selectMonthFn}
+            onClick={selection === 'disabled' ? () => {} : this.selectMonthFn}
             data-month={month}
           >
             {month}
