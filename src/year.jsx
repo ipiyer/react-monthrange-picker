@@ -99,6 +99,7 @@ class YearBase extends React.Component {
             <button
               className="btn btn-plain year-down pull-left"
               onClick={this.reduceYear}
+              type="button"
             >
               <i className="fa fa-chevron-circle-left" />
             </button>
@@ -106,6 +107,7 @@ class YearBase extends React.Component {
             <button
               className="btn btn-plain year-up pull-right"
               onClick={this.incYear}
+              type="button"
             >
               <i className="fa fa-chevron-circle-right" />
             </button>
