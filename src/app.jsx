@@ -64,22 +64,24 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="month-picker">
-        <Picker
-          selectedDateRange={this.state.selectedDateRange.clone()} onClick={this.handleClickFn}
-        />
-        <Calendar
-          selectedDateRange={this.state.selectedDateRange.clone()}
-          restrictionRange={this.state.restrictionRange.clone()}
-          display={this.state.display}
-          onSelect={this.onSelectFn}
-          onApply={this.onApplyFn}
-          onCancel={this.onCancelFn}
-          direction={this.props.direction}
-          onYearChange={this.props.onYearChange}
-          position={this.props.position}
-        />
-      </div>
+      <form onSubmit={() => alert('Submitted')}>
+        <div className="month-picker">
+          <Picker
+            selectedDateRange={this.state.selectedDateRange.clone()} onClick={this.handleClickFn}
+          />
+          <Calendar
+            selectedDateRange={this.state.selectedDateRange.clone()}
+            restrictionRange={this.state.restrictionRange.clone()}
+            display={this.state.display}
+            onSelect={this.onSelectFn}
+            onApply={this.onApplyFn}
+            onCancel={this.onCancelFn}
+            direction={this.props.direction}
+            onYearChange={this.props.onYearChange}
+            position={this.props.position}
+          />
+        </div>
+      </form>
     );
   }
 }
